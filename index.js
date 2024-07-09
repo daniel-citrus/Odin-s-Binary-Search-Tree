@@ -1,28 +1,29 @@
 class Node {
-    value;
-    left;
-    right;
-
     constructor(value, left = null, right = null) {
-        this.value = value;
+        this.data = value;
         this.left = left;
         this.right = right;
     }
 }
 
 class Tree {
-    root;
-
     constructor(array) {
-        this.root = buildTree(cleanArray(array));
+        this.root = this.buildTree(this.cleanArray(array));
     }
 
     buildTree(array) {
-        
+        if (!array.length) {
+            return null;
+        }
+
+        const midpoint = Math.floor(array.length / 2);
+        const left = this.buildTree(array.slice(0, midpoint));
+        const right = this.buildTree(array.slice(midpoint + 1));
+        return new Node(array[midpoint], left, right);
     }
 
     cleanArray(array) {
-        return removeDuplicates(mergeSort(array));
+        return this.removeDuplicates(this.mergeSort(array));
     }
 
     mergeSort(array) {
@@ -31,8 +32,8 @@ class Tree {
         }
 
         const midpoint = Math.floor(array.length / 2);
-        const left = mergeSort(array.slice(0, midpoint));
-        const right = mergeSort(array.slice(midpoint));
+        const left = this.mergeSort(array.slice(0, midpoint));
+        const right = this.mergeSort(array.slice(midpoint));
         let result = [];
 
         while (left.length && right.length) {
@@ -64,4 +65,29 @@ class Tree {
 
         return result;
     }
+
+    function 
+
+    prettyPrint(node = this.root, prefix = '', isLeft = true) {
+        if (node === null) {
+            return;
+        }
+        if (node.right !== null) {
+            this.prettyPrint(
+                node.right,
+                `${prefix}${isLeft ? '│   ' : '    '}`,
+                false
+            );
+        }
+        console.log(`${prefix}${isLeft ? '└── ' : '┌── '}${node.data}`);
+        if (node.left !== null) {
+            this.prettyPrint(
+                node.left,
+                `${prefix}${isLeft ? '    ' : '│   '}`,
+                true
+            );
+        }
+    }
 }
+
+let tree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
