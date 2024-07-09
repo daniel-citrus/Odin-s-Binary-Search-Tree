@@ -55,19 +55,6 @@ class Tree {
         return result;
     }
 
-    removeDuplicates(array) {
-        const set = new Set(array);
-        const result = [];
-
-        for (const entry of set) {
-            result.push(entry);
-        }
-
-        return result;
-    }
-
-    function 
-
     prettyPrint(node = this.root, prefix = '', isLeft = true) {
         if (node === null) {
             return;
@@ -87,6 +74,17 @@ class Tree {
                 true
             );
         }
+    }
+
+    removeDuplicates(array) {
+        const set = new Set(array);
+        const result = [];
+
+        for (const entry of set) {
+            result.push(entry);
+        }
+
+        return result;
     }
 }
 
