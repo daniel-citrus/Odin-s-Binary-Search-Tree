@@ -1,0 +1,19 @@
+{
+  "name": "odin-s-binary-search-tree",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/daniel-citrus/Odin-s-Binary-Search-Tree.git"
+  },
+  "author": "Daniel",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/daniel-citrus/Odin-s-Binary-Search-Tree/issues"
+  },
+  "homepage": "https://github.com/daniel-citrus/Odin-s-Binary-Search-Tree#readme"
+}
