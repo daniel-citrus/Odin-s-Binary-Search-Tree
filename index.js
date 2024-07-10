@@ -26,9 +26,20 @@ class Tree {
         return this.removeDuplicates(this.mergeSort(array));
     }
 
+    deleteItem(value, node = this.root) {
+        // Delete a leaf node
+        //  check next left and right nodes
+        //   if one matches, check if both left and right nodes of that node are null
+        //    if both null, point current node to null
+
+    }
+
+    greatestNode() {}
+
+    smallestNode() {}
+
     insert(value, node = this.root) {
         if (node.data === value) {
-            console.log(`Insert value: ${value} already exists in the tree.`);
             return;
         }
 
