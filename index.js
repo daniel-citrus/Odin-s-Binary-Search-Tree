@@ -27,16 +27,38 @@ class Tree {
     }
 
     deleteItem(value, node = this.root) {
-        // Delete a leaf node
-        //  check next left and right nodes
-        //   if one matches, check if both left and right nodes of that node are null
-        //    if both null, point current node to null
+        if (!node) {
+            return;
+        }
 
+        // Find match
+        if (value < node.data) {
+            node.left = this.deleteItem(value, node.left);
+        } else if (value > node.data) {
+            node.right = this.deleteItem(value, node.right);
+        }
+
+        // Match found
+        if (value === node.data) {
+            // Only one child node
+            if (!node.left) {
+                return node.right;
+            } else if (!node.right) {
+                return node.left;
+            }
+
+            // Two child nodes
+        }
+
+        return node;
     }
 
-    greatestNode() {}
+    // Find the smallest value in the tree
+    minimum(root) {
+        let ptr = root;
 
-    smallestNode() {}
+        while (ptr);
+    }
 
     insert(value, node = this.root) {
         if (node.data === value) {
@@ -121,4 +143,5 @@ class Tree {
 }
 
 let tree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
+tree.deleteItem();
 tree.prettyPrint();
