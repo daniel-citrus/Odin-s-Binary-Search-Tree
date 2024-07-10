@@ -26,6 +26,27 @@ class Tree {
         return this.removeDuplicates(this.mergeSort(array));
     }
 
+    insert(value, node = this.root) {
+        if (node.data === value) {
+            console.log(`Insert value: ${value} already exists in the tree.`);
+            return;
+        }
+
+        if (value < node.data) {
+            if (!node.left) {
+                node.left = new Node(value);
+            } else {
+                this.insert(value, node.left);
+            }
+        } else if (value > node.data) {
+            if (!node.right) {
+                node.right = new Node(value);
+            } else {
+                this.insert(value, node.right);
+            }
+        }
+    }
+
     mergeSort(array) {
         if (array.length === 1) {
             return array;
@@ -89,3 +110,4 @@ class Tree {
 }
 
 let tree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
+tree.prettyPrint();
