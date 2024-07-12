@@ -28,7 +28,7 @@ class Tree {
 
     deleteItem(value, node = this.root) {
         if (!node) {
-            return;
+            return null;
         }
 
         // Find match
@@ -48,6 +48,8 @@ class Tree {
             }
 
             // Two child nodes
+            node.data = this.minimum(node.right);
+            node.right = this.deleteItem(node.data, node.right);
         }
 
         return node;
@@ -56,8 +58,17 @@ class Tree {
     // Find the smallest value in the tree
     minimum(root) {
         let ptr = root;
+        let min = root.data;
 
-        while (ptr);
+        while (ptr) {
+            if (ptr.data < min) {
+                min = ptr.data;
+            }
+
+            ptr = ptr.left;
+        }
+
+        return min;
     }
 
     insert(value, node = this.root) {
@@ -143,5 +154,5 @@ class Tree {
 }
 
 let tree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
-tree.deleteItem();
+tree.deleteItem(67);
 tree.prettyPrint();
