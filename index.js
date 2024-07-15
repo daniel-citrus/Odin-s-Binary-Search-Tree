@@ -71,6 +71,33 @@ class Tree {
         return ptr;
     }
 
+    height(node) {
+        
+    }
+
+    inOrder(callback) {
+        const result = [];
+        helper(this.root);
+
+        function helper(root) {
+            if (!root) {
+                return null;
+            }
+
+            helper(root.left);
+
+            if (callback) {
+                callback(root.data);
+            } else {
+                result.push(root.data);
+            }
+
+            helper(root.right);
+        }
+
+        return result;
+    }
+
     insert(value, node = this.root) {
         if (node.data === value) {
             return;
@@ -91,20 +118,19 @@ class Tree {
         }
     }
 
-    levelOrder(
-        callback = (inp) => {
-            return inp;
-        }
-    ) {
+    levelOrder(callback) {
         const queue = [];
         const result = [];
-        let node;
         queue.push(this.root);
 
         while (queue.length) {
-            node = queue.shift();
+            const node = queue.shift();
 
-            result.push(callback(node.data));
+            if (callback) {
+                callback(node.data);
+            } else {
+                result.push(node.data);
+            }
 
             if (node.left) {
                 queue.push(node.left);
@@ -163,6 +189,50 @@ class Tree {
         return min;
     }
 
+    postOrder(callback) {
+        const result = [];
+        helper(this.root);
+
+        function helper(root) {
+            if (!root) {
+                return null;
+            }
+
+            helper(root.left);
+            helper(root.right);
+
+            if (callback) {
+                callback(root.data);
+            } else {
+                result.push(root.data);
+            }
+        }
+
+        return result;
+    }
+
+    preOrder(callback) {
+        const result = [];
+        helper(this.root);
+
+        function helper(root) {
+            if (!root) {
+                return null;
+            }
+
+            if (callback) {
+                callback(root.data);
+            } else {
+                result.push(root.data);
+            }
+
+            helper(root.left);
+            helper(root.right);
+        }
+
+        return result;
+    }
+
     prettyPrint(node = this.root, prefix = '', isLeft = true) {
         if (node === null) {
             return;
@@ -199,4 +269,4 @@ class Tree {
 let tree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
 tree.deleteItem(67);
 tree.prettyPrint();
-console.log(tree.levelOrder());
+console.log(tree.postOrder());
