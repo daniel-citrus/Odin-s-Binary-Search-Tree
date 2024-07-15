@@ -55,6 +55,23 @@ class Tree {
         return node;
     }
 
+    depth(node) {
+        let ptr = this.root;
+        let count = 0;
+
+        while (ptr) {
+            if (node.data < ptr.data) {
+                ptr = ptr.left;
+            } else if (node.data > ptr.data) {
+                ptr = ptr.right;
+            } else {
+                return count;
+            }
+
+            count++;
+        }
+    }
+
     find(value) {
         let ptr = this.root;
 
@@ -76,13 +93,13 @@ class Tree {
             return -1;
         }
 
-        const left = this.height(node.left);
-        const right = this.height(node.right);
+        const left = this.height(node.left) + 1;
+        const right = this.height(node.right) + 1;
 
         if (left <= right) {
-            return right + 1;
+            return right;
         } else {
-            return left + 1;
+            return left;
         }
     }
 
