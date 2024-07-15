@@ -146,6 +146,12 @@ class Tree {
         }
     }
 
+    isBalanced() {
+        let diff = this.height(this.root.left) - this.height(this.root.right);
+        diff = Math.abs(diff);
+        return diff <= 1;
+    }
+
     levelOrder(callback) {
         const queue = [];
         const result = [];
@@ -295,5 +301,5 @@ class Tree {
 }
 
 let tree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
-tree.deleteItem(67);
 tree.prettyPrint();
+console.log(tree.isBalanced());
