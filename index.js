@@ -55,20 +55,20 @@ class Tree {
         return node;
     }
 
-    // Find the smallest value in the tree
-    minimum(root) {
-        let ptr = root;
-        let min = root.data;
+    find(value) {
+        let ptr = this.root;
 
         while (ptr) {
-            if (ptr.data < min) {
-                min = ptr.data;
+            if (value < ptr.data) {
+                ptr = ptr.left;
+            } else if (value > ptr.data) {
+                ptr = ptr.right;
+            } else {
+                break;
             }
-
-            ptr = ptr.left;
         }
 
-        return min;
+        return ptr;
     }
 
     insert(value, node = this.root) {
@@ -89,6 +89,33 @@ class Tree {
                 this.insert(value, node.right);
             }
         }
+    }
+
+    levelOrder(
+        callback = (inp) => {
+            return inp;
+        }
+    ) {
+        const queue = [];
+        const result = [];
+        let node;
+        queue.push(this.root);
+
+        while (queue.length) {
+            node = queue.shift();
+
+            result.push(callback(node.data));
+
+            if (node.left) {
+                queue.push(node.left);
+            }
+
+            if (node.right) {
+                queue.push(node.right);
+            }
+        }
+
+        return result;
     }
 
     mergeSort(array) {
@@ -118,6 +145,22 @@ class Tree {
         }
 
         return result;
+    }
+
+    // Find the smallest value in the tree
+    minimum(root) {
+        let ptr = root;
+        let min = root.data;
+
+        while (ptr) {
+            if (ptr.data < min) {
+                min = ptr.data;
+            }
+
+            ptr = ptr.left;
+        }
+
+        return min;
     }
 
     prettyPrint(node = this.root, prefix = '', isLeft = true) {
@@ -156,3 +199,4 @@ class Tree {
 let tree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
 tree.deleteItem(67);
 tree.prettyPrint();
+console.log(tree.levelOrder());
