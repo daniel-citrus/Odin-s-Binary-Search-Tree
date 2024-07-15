@@ -72,7 +72,18 @@ class Tree {
     }
 
     height(node) {
-        
+        if (!node) {
+            return -1;
+        }
+
+        const left = this.height(node.left);
+        const right = this.height(node.right);
+
+        if (left <= right) {
+            return right + 1;
+        } else {
+            return left + 1;
+        }
     }
 
     inOrder(callback) {
@@ -269,4 +280,3 @@ class Tree {
 let tree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
 tree.deleteItem(67);
 tree.prettyPrint();
-console.log(tree.postOrder());
