@@ -288,6 +288,11 @@ class Tree {
         }
     }
 
+    rebalace() {
+        const elements = this.inOrder();
+        this.root = this.buildTree(elements);
+    }
+
     removeDuplicates(array) {
         const set = new Set(array);
         const result = [];
@@ -300,6 +305,6 @@ class Tree {
     }
 }
 
-let tree = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
-tree.prettyPrint();
-console.log(tree.isBalanced());
+function randomArray(length) {
+
+}
