@@ -306,5 +306,41 @@ class Tree {
 }
 
 function randomArray(length) {
+    function randomInt(max) {
+        return Math.floor(Math.random() * max);
+    }
 
+    const set = new Set();
+
+    while (set.size < length) {
+        const num = randomInt(999);
+
+        if (!set.has(num)) {
+            set.add(num);
+        }
+    }
+
+    return Array.from(set);
 }
+
+const tree = new Tree(randomArray(20));
+tree.prettyPrint();
+console.log(`Balanced:   ${tree.isBalanced()}`);
+console.log(`levelOrder: [${tree.levelOrder()}]`);
+console.log(`preOrder:   [${tree.preOrder()}]`);
+console.log(`postOrder:  [${tree.postOrder()}]`);
+console.log(`inOrder:    [${tree.inOrder()}]`);
+tree.insert(25);
+tree.insert(55);
+tree.insert(95);
+tree.insert(26);
+tree.insert(27);
+console.log(`Added:      25, 55, 95, 26, 27`);
+console.log(`Balanced:   ${tree.isBalanced()}`);
+console.log(`Rebalance()`);
+tree.rebalace();
+console.log(`Balanced:   ${tree.isBalanced()}`);
+console.log(`levelOrder: [${tree.levelOrder()}]`);
+console.log(`preOrder:   [${tree.preOrder()}]`);
+console.log(`postOrder:  [${tree.postOrder()}]`);
+console.log(`inOrder:    [${tree.inOrder()}]`);
